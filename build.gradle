@@ -1,0 +1,28 @@
+plugins {
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+repositories {
+    jcenter()
+}
+
+group = 'com.coditory.sandbox'
+version = '0.1.0-SNAPSHOT'
+
+application {
+    mainClassName = "com.coditory.sandbox.MongoDbPopulator"
+}
+
+dependencies {
+    compileOnly "org.projectlombok:lombok:1.18.12"
+    annotationProcessor "org.projectlombok:lombok:1.18.12"
+    implementation "org.mongodb:mongo-java-driver:3.11.2"
+}
+
+tasks.withType(Jar) {
+    archiveFileName = "mongodb-populator.jar"
+    manifest {
+        attributes(["Main-Class": application.mainClassName])
+    }
+}
